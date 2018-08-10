@@ -1,6 +1,6 @@
-# React Express Sass Redux App Skeleton
+# BioThings Stats
 
-A quick easy to use skelton ready to go
+Stats app for BioThings featuring:
 
   - Redux 4
   - Express 4.16
@@ -20,7 +20,3 @@ $ npm install
 $ npm start
 $ webpack --watch
 ```
-
-### Todos
-
- - Add testing
