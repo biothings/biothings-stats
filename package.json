@@ -1,0 +1,54 @@
+{
+  "name": "react-base",
+  "version": "1.0.0",
+  "description": "A MERN app skeleton",
+  "main": "server.js",
+  "scripts": {
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcodarko/react-base.git"
+  },
+  "author": "Marco Cano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcodarko/react-base/issues"
+  },
+  "homepage": "https://github.com/marcodarko/react-base#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "connected-react-router": "^4.3.0",
+    "express": "^4.16.3",
+    "history": "^4.7.2",
+    "lodash": "^4.17.10",
+    "method-override": "^3.0.0",
+    "morgan": "^1.9.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "redux-devtools-extension": "^2.13.5",
+    "request": "^2.87.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.2",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
