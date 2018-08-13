@@ -8,12 +8,8 @@ $background_color_3: dodgerblue;
 
 
 body{
-  background: -webkit-linear-gradient(violet, lightblue);
-  background: -o-linear-gradient(violet, lightblue);
-  background: linear-gradient(violet, lightblue);
   font-family: sans-serif;
   height: 100vh;
-  box-shadow: 10px 10px blue;
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
@@ -59,4 +55,42 @@ body{
 	.header-right {
 		float: none;
 	}
+}
+
+@mixin button-bg($bg) {
+  background: $bg;
+  &:hover {
+    background:darken($bg,8%);
+    transition: all 0.3s ease;
+  }
+  &:active {
+    background:darken($bg,25%);
+  }
+}
+
+.btn {
+ color:white;
+ text-decoration:none;
+ padding:5px 10px;
+ border-radius:3px;
+ font-family: sans-serif;
+}
+
+.btn-green {
+   @include button-bg(#2ecc71);
+}
+
+.btn-blue {
+   @include button-bg(#3498db);
+}
+
+.btn-yellow{
+   @include button-bg(#f1c40f);
+}
+
+.btn-red {
+   @include button-bg(#e74c3c);
+}
+.btn-grey {
+   @include button-bg(#aaaaaa);
 }

@@ -1,10 +1,6 @@
 body {
-  background: -webkit-linear-gradient(violet, lightblue);
-  background: -o-linear-gradient(violet, lightblue);
-  background: linear-gradient(violet, lightblue);
   font-family: sans-serif;
-  height: 100vh;
-  box-shadow: 10px 10px blue; }
+  height: 100vh; }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 .header {
@@ -41,3 +37,50 @@ body {
     text-align: left; }
   .header-right {
     float: none; } }
+
+.btn {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-family: sans-serif; }
+
+.btn-green {
+  background: #2ecc71; }
+  .btn-green:hover {
+    background: #26ab5f;
+    transition: all 0.3s ease; }
+  .btn-green:active {
+    background: #176437; }
+
+.btn-blue {
+  background: #3498db; }
+  .btn-blue:hover {
+    background: #2383c4;
+    transition: all 0.3s ease; }
+  .btn-blue:active {
+    background: #16527a; }
+
+.btn-yellow {
+  background: #f1c40f; }
+  .btn-yellow:hover {
+    background: #cba50c;
+    transition: all 0.3s ease; }
+  .btn-yellow:active {
+    background: #796307; }
+
+.btn-red {
+  background: #e74c3c; }
+  .btn-red:hover {
+    background: #df2e1b;
+    transition: all 0.3s ease; }
+  .btn-red:active {
+    background: #921e12; }
+
+.btn-grey {
+  background: #aaaaaa; }
+  .btn-grey:hover {
+    background: #969696;
+    transition: all 0.3s ease; }
+  .btn-grey:active {
+    background: #6a6a6a; }

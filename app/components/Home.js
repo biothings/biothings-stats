@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux'
 import axios from 'axios';
+import Google from './Google';
 
 class Home extends React.Component {
 
@@ -35,6 +36,7 @@ class Home extends React.Component {
         <button onClick={this.testApi}>Test API route</button>
         <p>API response:</p>
         <p>{this.state.apiRes}</p>
+        <Google/>
       </section>
     );
   }

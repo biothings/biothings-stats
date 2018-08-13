@@ -19,10 +19,10 @@ export default class Nav extends React.Component {
     return (
       <header>
         <nav className="header">
-          <Link className="logo" to="/">React App</Link>
+          <Link className="logo" to="/">BioThings Stats</Link>
           <div className="header-right">
             <Link className="" to='/'>Home</Link>
-            <Link className="" to='/marco'>React Routing Test</Link>
+            <Link className="" to='/marco'>Link</Link>
           </div>
         </nav>
       </header>
