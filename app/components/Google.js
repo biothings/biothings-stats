@@ -27,29 +27,43 @@ class Home extends React.Component {
     super(props);
     this.state={
         apiKey: 'AIzaSyDN7sQm-u2pynotVsbwHWJpzM8DfLCELzQ',
-        apiURL : 'https://www.googleapis.com/analytics/v3/data/realtime?ids=ga:',
-        options : '&metrics=rt:activeUsers&dimensions=rt:userType',
-        viewID : '123483477',
+        realtimeApiURL : 'https://www.googleapis.com/analytics/v3/data/realtime?ids=ga:',
+        analyticsApiURL : 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga:',
+        options : '&start-date=30daysAgo&end-date=yesterday&metrics=rt:activeUsers&dimensions=rt:userType',
+        viewID : '51012565',
         apiOptions : '',
         user: {},
-        activeUsers: '-'
+        activeUsers: '-',
+        totalUsers: '-'
     }
-    this.testApi = this.testApi.bind(this);
+    this.fetchRealTimeData = this.fetchRealTimeData.bind(this);
+    this.fetchAnalyticsData = this.fetchAnalyticsData.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.shapeData = this.shapeData.bind(this);
   }
 
-  testApi(){
+  fetchRealTimeData(){
     let _authResp = googleGetAuthResponse();
-    axios.get(this.state.apiURL + this.state.viewID + this.state.options + "&access_token=" + _authResp.accessToken).then(res=>{
+    axios.get(this.state.realtimeApiURL + this.state.viewID + this.state.options + "&access_token=" + _authResp.accessToken).then(res=>{
       var str = JSON.stringify(res.data, null, 2); // spacing level = 2
-      console.log(str);
+      // console.log(str);
       this.setState({
         activeUsers: res.data.totalsForAllResults['rt:activeUsers']
       });
 
     }).catch(err=>{
       throw(err);
+    })
+
+    this.fetchAnalyticsData();
+
+  }
+
+  fetchAnalyticsData(){
+    axios.get(this.state.analyticsApiURL + this.state.viewID +'&start-date=30daysAgo&end-date=yesterday&metrics=ga:users'+ "&access_token=" + _authResp.accessToken).then(res=>{
+      // console.log(res.data);
+      this.shapeData(res.data)
     })
   }
 
@@ -68,14 +82,24 @@ class Home extends React.Component {
       window.location.reload();
   }
 
+  shapeData(data){
+    console.log(data)
+    if (data.totalsForAllResults['ga:users']) {
+      this.setState({
+        totalUsers: data.totalsForAllResults['ga:users']
+      })
+    }
+  }
+
   render() {
     return (
       <section className="" style={{padding: '20px', margin: '0 auto'}}>
         <hr/>
         <h1>Google Real-Time API</h1>
-        <button disabled={this.state.user.name ? false : true} className={"btn " + (this.state.user.name ? 'btn-blue' : 'btn-grey') } onClick={this.testApi}>Test Google Real-Time API</button>
+        <button disabled={this.state.user.name ? false : true} className={"btn " + (this.state.user.name ? 'btn-blue' : 'btn-grey') } onClick={this.fetchRealTimeData}>Test Google Real-Time API</button>
         <hr/>
-        <h2>Active Users: {this.state.activeUsers}</h2>
+        <h2>MyGene.info Active Users: {this.state.activeUsers}</h2>
+        <h2>MyGene.info Total Users: {this.state.totalUsers}</h2>
         <hr/>
         <GoogleAPI className="btn btn-blue"
           clientId='166215448370-ktio5nb4uhrduq8sf9a8v4lud9e81es7.apps.googleusercontent.com'
