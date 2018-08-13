@@ -4,18 +4,6 @@ import { connect } from 'react-redux'
 import axios from 'axios';
 import {GoogleAPI, GoogleLogin, GoogleLogout, CustomGoogleLogin, CustomGoogleLogout, googleGetBasicProfil, googleGetAuthResponse} from 'react-google-oauth'
 
-// {
-//   "type": "service_account",
-//   "project_id": "mygene-212918",
-//   "private_key_id": "d1b5f84f36ccd757d03e1775ef89ebbe64afe0b7",
-//   "client_email": "mygenestats@mygene-212918.iam.gserviceaccount.com",
-//   "client_id": "116692597700314801080",
-//   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-//   "token_uri": "https://oauth2.googleapis.com/token",
-//   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-//   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mygenestats%40mygene-212918.iam.gserviceaccount.com"
-// }
-
 
 //client ID and secret
 //166215448370-ktio5nb4uhrduq8sf9a8v4lud9e81es7.apps.googleusercontent.com
@@ -26,11 +14,10 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-        apiKey: 'AIzaSyDN7sQm-u2pynotVsbwHWJpzM8DfLCELzQ',
         realtimeApiURL : 'https://www.googleapis.com/analytics/v3/data/realtime?ids=ga:',
         analyticsApiURL : 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga:',
         options : '&start-date=30daysAgo&end-date=yesterday&metrics=rt:activeUsers&dimensions=rt:userType',
-        viewID : '51012565',
+        mygeneViewID : '51012565',
         apiOptions : '',
         user: {},
         activeUsers: '-',
@@ -45,9 +32,7 @@ class Home extends React.Component {
 
   fetchRealTimeData(){
     let _authResp = googleGetAuthResponse();
-    axios.get(this.state.realtimeApiURL + this.state.viewID + this.state.options + "&access_token=" + _authResp.accessToken).then(res=>{
-      var str = JSON.stringify(res.data, null, 2); // spacing level = 2
-      // console.log(str);
+    axios.get(this.state.realtimeApiURL + this.state.mygeneViewID + this.state.options + "&access_token=" + _authResp.accessToken).then(res=>{
       this.setState({
         activeUsers: res.data.totalsForAllResults['rt:activeUsers']
       });
@@ -61,7 +46,8 @@ class Home extends React.Component {
   }
 
   fetchAnalyticsData(){
-    axios.get(this.state.analyticsApiURL + this.state.viewID +'&start-date=30daysAgo&end-date=yesterday&metrics=ga:users'+ "&access_token=" + _authResp.accessToken).then(res=>{
+    let _authResp = googleGetAuthResponse();
+    axios.get(this.state.analyticsApiURL + this.state.mygeneViewID +'&start-date=30daysAgo&end-date=yesterday&metrics=ga:users'+ "&access_token=" + _authResp.accessToken).then(res=>{
       // console.log(res.data);
       this.shapeData(res.data)
     })
@@ -74,7 +60,7 @@ class Home extends React.Component {
           user : _user,
         });
 
-        console.log(this.state.user);
+        //console.log(this.state.user);
     }
 
   handleLogout(){
@@ -83,7 +69,7 @@ class Home extends React.Component {
   }
 
   shapeData(data){
-    console.log(data)
+    //console.log(data)
     if (data.totalsForAllResults['ga:users']) {
       this.setState({
         totalUsers: data.totalsForAllResults['ga:users']
