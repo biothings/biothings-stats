@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import Login from './Login.js';
 
 export default class Nav extends React.Component {
 
@@ -21,8 +22,9 @@ export default class Nav extends React.Component {
         <nav className="header">
           <Link className="logo" to="/">BioThings Stats</Link>
           <div className="header-right">
-            <Link className="" to='/'>Home</Link>
-            <Link className="" to='/marco'>Link</Link>
+            {/* <Link className="" to='/'>Home</Link>
+            <Link className="" to='/marco'>Link</Link> */}
+            <Login/>
           </div>
         </nav>
       </header>

@@ -1,12 +1,15 @@
 let initalState ={
-  something: 'initial value'
+  user: {}
 }
 
 const rootReducer = (state = initalState, action) => {
   // console.log('reducer runnning', action);
   switch (action.type) {
-    case "TEST":
-      return Object.assign({}, state, { something: action.payload });
+    case "USER-UPDATE":
+      return Object.assign({}, state, { user: action.payload });
+      break;
+    case "USER-LOGOUT":
+      return Object.assign({}, state, { user: {} });
       break;
     default:
       return state

@@ -6,7 +6,7 @@ body {
 .header {
   overflow: hidden;
   background-color: #f1f1f1;
-  padding: 20px 10px; }
+  padding: 5px; }
   .header a {
     float: left;
     color: black;
@@ -14,7 +14,7 @@ body {
     padding: 12px;
     text-decoration: none;
     font-size: 18px;
-    line-height: 25px;
+    line-height: 20px;
     border-radius: 4px;
     font-family: sans-serif; }
     .header a:hover {

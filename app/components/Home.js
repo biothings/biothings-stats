@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux'
 import axios from 'axios';
-import Google from './Google';
+import DataPanel from './DataPanel';
 
 class Home extends React.Component {
 
@@ -29,14 +29,7 @@ class Home extends React.Component {
   render() {
     return (
       <section className="" style={{padding: '20px', margin: '0 auto'}}>
-        <h1>Redux</h1>
-        <button onClick={()=>{this.props.onTestClick(this.state.test)}}>Test Redux Store</button>
-        <p>VALUE OF 'SOMETHING': {this.props.something}</p>
-        <hr/>
-        <button onClick={this.testApi}>Test API route</button>
-        <p>API response:</p>
-        <p>{this.state.apiRes}</p>
-        <Google/>
+        <DataPanel/>
       </section>
     );
   }
