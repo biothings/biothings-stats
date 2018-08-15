@@ -1,4 +1,6 @@
-$mainColor: lightblue;
+$mainMyGene: #3366CC;
+$mainMyChem: #FD7400;
+$mainMyVariant: #40B307;
 $color_1: black;
 $color_2: white;
 $font_family_1: sans-serif;
@@ -6,10 +8,29 @@ $background_color_1: #f1f1f1;
 $background_color_2: #ddd;
 $background_color_3: dodgerblue;
 
+.svg-map {
+  width: 100%;
+  height: auto;
+  stroke: #666;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round; }
+  .svg-map__location {
+    fill: #c8c8c8;
+    cursor: pointer; }
+    .svg-map__location:focus, .svg-map__location:hover {
+      fill: lighten($mainMyGene,20%);
+      outline: 0; }
+    .svg-map__location[aria-checked=true] {
+      fill: lighten($mainMyGene,40%); }
 
 body{
   font-family: sans-serif;
   height: 100vh;
+}
+
+h1,h2,h3,h4,h5{
+  font-weight: lighter;
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
@@ -34,7 +55,7 @@ body{
 	}
 	a.logo {
 		font-size: 25px;
-		font-weight: bold;
+		font-weight: lighter;
 	}
 	a.active {
 		background-color: $background_color_3;

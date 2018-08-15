@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { connect } from 'react-redux'
 import axios from 'axios';
 import {googleGetAuthResponse} from 'react-google-oauth'
+import Map from './Map';
 
 
 //client ID and secret
@@ -102,15 +103,17 @@ class DataPanel extends React.Component {
           {this.state.results.map( (item, index)=>{
             return(
               <tr key={index}>
-                <td style={{padding: '20px'}}> {item[0]} </td>
-                <td style={{padding: '20px'}}> {item[1]} </td>
-                <td style={{padding: '20px'}}> {item[2]} </td>
-                <td style={{padding: '20px'}}> {item[3]} </td>
-                <td style={{padding: '20px'}}> {item[4]} </td>
+                <td> {item[0]} </td>
+                <td> {item[1]} </td>
+                <td> {item[2]} </td>
+                <td> {item[3]} </td>
+                <td> {item[4]} </td>
               </tr>
             )
           })}
         </table>
+        <hr/>
+        <Map/>
       </section>
     );
   }

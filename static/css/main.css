@@ -1,6 +1,28 @@
+.svg-map {
+  width: 100%;
+  height: auto;
+  stroke: #666;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round; }
+
+.svg-map__location {
+  fill: #c8c8c8;
+  cursor: pointer; }
+
+.svg-map__location:focus, .svg-map__location:hover {
+  fill: #85a3e0;
+  outline: 0; }
+
+.svg-map__location[aria-checked=true] {
+  fill: #d6e0f5; }
+
 body {
   font-family: sans-serif;
   height: 100vh; }
+
+h1, h2, h3, h4, h5 {
+  font-weight: lighter; }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 .header {
@@ -22,7 +44,7 @@ body {
       color: black; }
   .header a.logo {
     font-size: 25px;
-    font-weight: bold; }
+    font-weight: lighter; }
   .header a.active {
     background-color: dodgerblue;
     color: white; }

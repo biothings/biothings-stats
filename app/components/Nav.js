@@ -20,7 +20,9 @@ export default class Nav extends React.Component {
     return (
       <header>
         <nav className="header">
-          <Link className="logo" to="/">BioThings Stats</Link>
+          <Link className="logo" to="/">
+            <img src='img/biostats.svg' width="100px"/>
+          </Link>
           <div className="header-right">
             {/* <Link className="" to='/'>Home</Link>
             <Link className="" to='/marco'>Link</Link> */}
