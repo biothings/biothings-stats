@@ -24,11 +24,9 @@ export default class Nav extends React.Component {
             <img src='img/biostats.svg' width="100px"/>
           </Link>
           <div className="header-right">
-            {/* <Link className="" to='/'>Home</Link>
-            <Link className="" to='/marco'>Link</Link> */}
             <Login/>
           </div>
-        </nav>
+        </nav>      
       </header>
     );
   }

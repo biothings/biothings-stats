@@ -1,28 +1,57 @@
 $mainMyGene: #3366CC;
 $mainMyChem: #FD7400;
 $mainMyVariant: #40B307;
-$color_1: black;
-$color_2: white;
+$white: black;
+$black: white;
 $font_family_1: sans-serif;
-$background_color_1: #f1f1f1;
-$background_color_2: #ddd;
-$background_color_3: dodgerblue;
+$light-grey: #f1f1f1;
+$light-grey2: #ddd;
+$blue: #2395cd;
 
-.svg-map {
-  width: 100%;
-  height: auto;
-  stroke: #666;
-  stroke-width: 1;
-  stroke-linecap: round;
-  stroke-linejoin: round; }
-  .svg-map__location {
-    fill: #c8c8c8;
-    cursor: pointer; }
-    .svg-map__location:focus, .svg-map__location:hover {
-      fill: lighten($mainMyGene,20%);
-      outline: 0; }
-    .svg-map__location[aria-checked=true] {
-      fill: lighten($mainMyGene,40%); }
+// HELPERS
+
+@-webkit-keyframes neon2 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
+  }
+}
+
+.activeUsers-MyGene{
+  font-size: 5em;
+  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+  animation: neon2 1.5s ease-in-out infinite alternate;
+}
+
+.centerText{
+  text-align: center;
+}
+
+.padding20{
+  padding:20px;
+}
+
+.margin20{
+  margin:20px;
+}
+
+.noMargin{
+  margin: 0;
+}
+
+.noPadding{
+  padding: 0;
+}
+
+.whiteText{
+  color:white;
+}
+
+.margin0Auto{
+  margin: 0 auto;
+}
 
 body{
   font-family: sans-serif;
@@ -36,11 +65,11 @@ h1,h2,h3,h4,h5{
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 .header {
 	overflow: hidden;
-	background-color: $background_color_1;
+	background-color: $light-grey;
 	padding: 5px;
 	a {
 		float: left;
-		color: $color_1;
+		color: $white;
 		text-align: center;
 		padding: 12px;
 		text-decoration: none;
@@ -49,8 +78,8 @@ h1,h2,h3,h4,h5{
 		border-radius: 4px;
 		font-family: $font_family_1;
 		&:hover {
-			background-color: $background_color_2;
-			color: $color_1;
+			background-color: $light-grey2;
+			color: $white;
 		}
 	}
 	a.logo {
@@ -58,8 +87,8 @@ h1,h2,h3,h4,h5{
 		font-weight: lighter;
 	}
 	a.active {
-		background-color: $background_color_3;
-		color: $color_2;
+		background-color: $blue;
+		color: $black;
 	}
 }
 .header-right {

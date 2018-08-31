@@ -1,14 +1,28 @@
 import React, { PropTypes } from 'react';
 import {Link} from 'react-router-dom';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import axios from 'axios';
 import {googleGetAuthResponse} from 'react-google-oauth'
 import Map from './Map';
+import CountUp from 'react-countup';
 
 
 //client ID and secret
 //166215448370-ktio5nb4uhrduq8sf9a8v4lud9e81es7.apps.googleusercontent.com
 //HuF8k0pmmWgW-o5IfLlXJMQt
+
+// var options = {
+//       useEasing: true,
+//       useGrouping: true,
+//       separator: ',',
+//       decimal: '.',
+//     };
+//     var demo = new CountUp('testNum', 0, sessionsCount, 0, 2.5, options);
+//     if (!demo.error) {
+//         demo.start();
+//     } else {
+//         console.error(demo.error);
+//     }
 
 class DataPanel extends React.Component {
 
@@ -20,9 +34,10 @@ class DataPanel extends React.Component {
         options : '&start-date=30daysAgo&end-date=yesterday&metrics=rt:activeUsers&dimensions=rt:userType',
         mygeneViewID : '51012565',
         apiOptions : '',
-        activeUsers: '-',
-        totalUsers: '-',
-        results:[]
+        activeUsers: 0,
+        totalUsers: 0,
+        results:[],
+        lastActiveUsers:0
     }
     this.fetchRealTimeData = this.fetchRealTimeData.bind(this);
     this.fetchAnalyticsData = this.fetchAnalyticsData.bind(this);
@@ -38,7 +53,7 @@ class DataPanel extends React.Component {
       + "&access_token="
       + _authResp.accessToken).then(res=>{
       this.setState({
-        activeUsers: res.data.totalsForAllResults['rt:activeUsers']
+        activeUsers: parseInt(res.data.totalsForAllResults['rt:activeUsers'])
       });
 
     }).catch(err=>{
@@ -61,7 +76,7 @@ class DataPanel extends React.Component {
       +'&max-results=10'
       + "&access_token="
       + _authResp.accessToken).then(res=>{
-      console.log(res.data);
+      // console.log(res.data);
       this.shapeData(res.data)
     }).catch(err=>{
       throw err;
@@ -83,31 +98,73 @@ class DataPanel extends React.Component {
     }
   }
 
+  componentDidMount(){
+    var self = this;
+    if (this.props.user.name) {
+      this.fetchRealTimeData();
+      this.fetchAnalyticsData();
+      var timer =setInterval(function(){
+        console.log('mygene timer');
+        self.setState({
+          lastActiveUsers: self.state.activeUsers
+        })
+        self.fetchRealTimeData()
+      }, 5000);
+    }
+  }
+
+  componentWillUnmount(){
+    // clearInterval(timer);
+  }
+
   render() {
     return (
-      <section className="" style={{padding: '20px', margin: '0 auto', textAlign:'center'}}>
+      <section className="margin0Auto padding20 centerText" style={{ background:'#215a9d'}}>
         <img src="img/mygene.svg" width="300px"/>
-        <h1>Google Real-Time API</h1>
+        <hr/>
         <button disabled={this.props.user.name ? false : true} className={"btn " + (this.props.user.name ? 'btn-blue' : 'btn-grey') } onClick={this.fetchRealTimeData}>Get Data</button>
         <hr/>
-        <h2>MyGene.info Active Users: {this.state.activeUsers}</h2>
-        <h2>MyGene.info Total Users: {this.state.totalUsers}</h2>
+        {/* <CountUp  className="account-balance"
+                  start={0}
+                  end={this.state.totalUsers}
+                  duration={3}
+                  separator=","/> */}
+        <h2 className="whiteText">Active Users Right Now</h2>
+        {this.state.activeUsers &&
+          <CountUp  className="whiteText activeUsers-MyGene"
+                    start={this.state.lastActiveUsers}
+                    end={this.state.activeUsers}
+                    duration={3}
+                    separator=","/>
+        }
+        <h2 className="whiteText">Requests in the last 30 days</h2>
+        {/* <h1 className="whiteText">{this.state.totalUsers}</h1> */}
+        {this.state.totalUsers &&
+          <CountUp  className="whiteText"
+                    style={{fontSize:'3em'}}
+                    start={0}
+                    end={this.state.totalUsers}
+                    duration={3}
+                    separator=","/>
+        }
         <table style={{margin:'auto'}}>
           <thead>
-            <th>Lat</th>
-            <th>Long</th>
-            <th>Page</th>
-            <th>Users</th>
-            <th>Sessions</th>
+            <th className="whiteText">Country</th>
+            <th className="whiteText">Lat</th>
+            <th className="whiteText">Long</th>
+            <th className="whiteText">Page</th>
+            <th className="whiteText">Users</th>
+            <th className="whiteText">Sessions</th>
           </thead>
           {this.state.results.map( (item, index)=>{
             return(
               <tr key={index}>
-                <td> {item[0]} </td>
-                <td> {item[1]} </td>
-                <td> {item[2]} </td>
-                <td> {item[3]} </td>
-                <td> {item[4]} </td>
+                <td className="whiteText"> {item[0]} </td>
+                <td className="whiteText"> {item[1]} </td>
+                <td className="whiteText"> {item[2]} </td>
+                <td className="whiteText"> {item[3]} </td>
+                <td className="whiteText"> {item[4]} </td>
+                <td className="whiteText"> {item[5]} </td>
               </tr>
             )
           })}

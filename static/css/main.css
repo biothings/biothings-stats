@@ -1,21 +1,34 @@
-.svg-map {
-  width: 100%;
-  height: auto;
-  stroke: #666;
-  stroke-width: 1;
-  stroke-linecap: round;
-  stroke-linejoin: round; }
+@-webkit-keyframes neon2 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF; }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF; } }
 
-.svg-map__location {
-  fill: #c8c8c8;
-  cursor: pointer; }
+.activeUsers-MyGene {
+  font-size: 5em;
+  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+  animation: neon2 1.5s ease-in-out infinite alternate; }
 
-.svg-map__location:focus, .svg-map__location:hover {
-  fill: #85a3e0;
-  outline: 0; }
+.centerText {
+  text-align: center; }
 
-.svg-map__location[aria-checked=true] {
-  fill: #d6e0f5; }
+.padding20 {
+  padding: 20px; }
+
+.margin20 {
+  margin: 20px; }
+
+.noMargin {
+  margin: 0; }
+
+.noPadding {
+  padding: 0; }
+
+.whiteText {
+  color: white; }
+
+.margin0Auto {
+  margin: 0 auto; }
 
 body {
   font-family: sans-serif;
@@ -46,7 +59,7 @@ h1, h2, h3, h4, h5 {
     font-size: 25px;
     font-weight: lighter; }
   .header a.active {
-    background-color: dodgerblue;
+    background-color: #2395cd;
     color: white; }
 
 .header-right {
