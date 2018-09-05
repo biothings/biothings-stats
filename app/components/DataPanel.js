@@ -5,24 +5,13 @@ import axios from 'axios';
 import {googleGetAuthResponse} from 'react-google-oauth'
 import Map from './Map';
 import CountUp from 'react-countup';
+import Chart from './Chart';
 
 
 //client ID and secret
 //166215448370-ktio5nb4uhrduq8sf9a8v4lud9e81es7.apps.googleusercontent.com
 //HuF8k0pmmWgW-o5IfLlXJMQt
 
-// var options = {
-//       useEasing: true,
-//       useGrouping: true,
-//       separator: ',',
-//       decimal: '.',
-//     };
-//     var demo = new CountUp('testNum', 0, sessionsCount, 0, 2.5, options);
-//     if (!demo.error) {
-//         demo.start();
-//     } else {
-//         console.error(demo.error);
-//     }
 
 class DataPanel extends React.Component {
 
@@ -37,11 +26,31 @@ class DataPanel extends React.Component {
         activeUsers: 0,
         totalUsers: 0,
         results:[],
-        lastActiveUsers:0
+        lastActiveUsers:0,
+        mapData:[],
+        pages: [],
+        activeUsersHistory:[]
     }
     this.fetchRealTimeData = this.fetchRealTimeData.bind(this);
     this.fetchAnalyticsData = this.fetchAnalyticsData.bind(this);
     this.shapeData = this.shapeData.bind(this);
+    this.shapeMapData = this.shapeMapData.bind(this);
+    this.getUniqueItemsInTopPages = this.getUniqueItemsInTopPages.bind(this);
+  }
+
+  getUniqueItemsInTopPages(list){
+    let pages =[]
+
+    for (var i = 0; i < this.state.results.length; i++) {
+      pages.push(this.state.results[i][5])
+    }
+
+    pages = pages.filter((x, i, a) => a.indexOf(x) == i)
+
+    this.setState({
+      'pages': pages
+    })
+
   }
 
   fetchRealTimeData(){
@@ -52,9 +61,16 @@ class DataPanel extends React.Component {
       + this.state.options
       + "&access_token="
       + _authResp.accessToken).then(res=>{
+      let users = parseInt(res.data.totalsForAllResults['rt:activeUsers']);
       this.setState({
-        activeUsers: parseInt(res.data.totalsForAllResults['rt:activeUsers'])
+        activeUsers: users
       });
+
+      //creates data for Chart, max length is 10
+      this.state.activeUsersHistory.push(users)
+      if (this.state.activeUsersHistory.length > 10) {
+        this.state.activeUsersHistory.shift();
+      }
 
     }).catch(err=>{
       throw(err);
@@ -71,12 +87,11 @@ class DataPanel extends React.Component {
       + this.state.mygeneViewID
       +'&start-date=30daysAgo&end-date=yesterday'
       +'&metrics=ga:users,ga:sessions'
-      +'&dimensions=ga:country,ga:latitude,ga:longitude,ga:pagePath'
+      +'&dimensions=ga:country,ga:region,ga:city,ga:latitude,ga:longitude,ga:pagePath'
       +'&sort=-ga:users'
       +'&max-results=10'
       + "&access_token="
       + _authResp.accessToken).then(res=>{
-      // console.log(res.data);
       this.shapeData(res.data)
     }).catch(err=>{
       throw err;
@@ -85,17 +100,33 @@ class DataPanel extends React.Component {
 
 
   shapeData(data){
-    //console.log(data)
     if (data.totalsForAllResults['ga:users']) {
       this.setState({
         totalUsers: data.totalsForAllResults['ga:users']
       })
     }
     if (data.rows) {
+      this.shapeMapData();
+      this.getUniqueItemsInTopPages();
       this.setState({
         results: data.rows
       })
     }
+  }
+
+  shapeMapData(){
+    let res =[]
+    let arr = this.state.results;
+    for (var i = 0; i < arr.length; i++) {
+      let long = parseFloat(arr[i][3]);
+      let lat = parseFloat(arr[i][4]);
+      let obj ={'name': arr[i][2]+', '+arr[i][1]+', '+arr[i][0],'coordinates':[lat,long],'users': arr[i][6] };
+      res.push(obj);
+    }
+    this.setState({
+      'mapData': res
+    });
+    this.props.sendMapData(this.state.mapData);
   }
 
   componentDidMount(){
@@ -113,62 +144,56 @@ class DataPanel extends React.Component {
     }
   }
 
-  componentWillUnmount(){
-    // clearInterval(timer);
-  }
-
   render() {
     return (
       <section className="margin0Auto padding20 centerText" style={{ background:'#215a9d'}}>
-        <img src="img/mygene.svg" width="300px"/>
-        <hr/>
-        <button disabled={this.props.user.name ? false : true} className={"btn " + (this.props.user.name ? 'btn-blue' : 'btn-grey') } onClick={this.fetchRealTimeData}>Get Data</button>
-        <hr/>
-        {/* <CountUp  className="account-balance"
-                  start={0}
-                  end={this.state.totalUsers}
-                  duration={3}
-                  separator=","/> */}
-        <h2 className="whiteText">Active Users Right Now</h2>
-        {this.state.activeUsers &&
-          <CountUp  className="whiteText activeUsers-MyGene"
-                    start={this.state.lastActiveUsers}
-                    end={this.state.activeUsers}
-                    duration={3}
-                    separator=","/>
-        }
-        <h2 className="whiteText">Requests in the last 30 days</h2>
-        {/* <h1 className="whiteText">{this.state.totalUsers}</h1> */}
-        {this.state.totalUsers &&
-          <CountUp  className="whiteText"
-                    style={{fontSize:'3em'}}
-                    start={0}
-                    end={this.state.totalUsers}
-                    duration={3}
-                    separator=","/>
-        }
-        <table style={{margin:'auto'}}>
-          <thead>
-            <th className="whiteText">Country</th>
-            <th className="whiteText">Lat</th>
-            <th className="whiteText">Long</th>
-            <th className="whiteText">Page</th>
-            <th className="whiteText">Users</th>
-            <th className="whiteText">Sessions</th>
-          </thead>
-          {this.state.results.map( (item, index)=>{
-            return(
-              <tr key={index}>
-                <td className="whiteText"> {item[0]} </td>
-                <td className="whiteText"> {item[1]} </td>
-                <td className="whiteText"> {item[2]} </td>
-                <td className="whiteText"> {item[3]} </td>
-                <td className="whiteText"> {item[4]} </td>
-                <td className="whiteText"> {item[5]} </td>
-              </tr>
-            )
-          })}
-        </table>
+        <img src="img/mygene-text.png" width="300px" className="margin20"/>
+        <button style={{position:'absolute', right:'20px'}} disabled={this.props.user.name ? false : true} className={"btn " + (this.props.user.name ? 'btn-blue' : 'btn-grey') } onClick={this.fetchRealTimeData}>Refresh</button>
+        {/* <div className="activeUsersBoxTest margin20">
+          <h2 className="whiteText">Active Users Right Now</h2>
+          {this.state.activeUsers &&
+            <CountUp  className="whiteText activeUsers-MyGene"
+                      start={this.state.lastActiveUsers}
+                      end={this.state.activeUsers}
+                      duration={3}
+                      separator=","/>
+          }
+          <Chart chartData={this.state.activeUsersHistory}/>
+        </div> */}
+        <div className="activeUsersBoxTest margin20 flex" style={{width:'50%', margin:'auto'}}>
+          <div style={{flex:1}}>
+            <h2 className="whiteText">Active Users Right Now</h2>
+            <CountUp  className="whiteText activeUsers-MyGene"
+                        start={this.state.lastActiveUsers}
+                        end={this.state.activeUsers}
+                        duration={3}
+                        separator=","/>
+          </div>
+          <Chart chartData={this.state.activeUsersHistory}/>
+        </div>
+        <div style={{width:'300px', margin:'auto'}}>
+
+
+        </div>
+        <br/>
+        {/* <h2 className="whiteText">Total Users</h2>
+        <h1 className="whiteText">{this.state.totalUsers}</h1> */}
+          {this.state.pages.length &&
+            <table style={{margin:'auto'}}>
+              <thead className='margin20'>
+                <th className="whiteText bold padding20" style={{border:'1px solid white'}}>
+                  Top Pages Visited
+                </th>
+                {this.state.pages.map( (page,i)=>{
+                  return (
+                    <th className="whiteText padding20" style={{border:'1px solid white'}} key={i}>
+                      { page }
+                    </th>
+                  )
+                })}
+              </thead>
+            </table>
+          }
         <hr/>
         <Map/>
       </section>
@@ -185,8 +210,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onTestClick: (value)=>{
-      const action = {type: "TEST", payload: value};
+    sendMapData: (value)=>{
+      const action = {type: "UPDATE-MAP", payload: value};
       dispatch(action);
     }
   }
