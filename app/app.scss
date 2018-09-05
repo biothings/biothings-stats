@@ -8,17 +8,75 @@ $light-grey: #f1f1f1;
 $light-grey2: #ddd;
 $blue: #2395cd;
 
-// HELPERS
+//MIXINS
+
+@mixin gradient($from, $to) {
+  /* fallback/image non-cover color */
+  background-color: $from;
+
+  /* Firefox 3.6+ */
+  background-image: -moz-linear-gradient($from, $to);
+
+  /* Safari 4+, Chrome 1+ */
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
+
+  /* Safari 5.1+, Chrome 10+ */
+  background-image: -webkit-linear-gradient($from, $to);
+
+  /* Opera 11.10+ */
+  background-image: -o-linear-gradient($from, $to);
+}
+
+.mG-back{
+  @include gradient($mainMyGene, #213542);
+}
+.mV-back{
+  @include gradient($mainMyVariant, #213542);
+}
+.mC-back{
+  @include gradient($mainMyChem, #213542);
+}
+
+.mG{
+  background: $mainMyGene;
+  &:hover {
+        background: lighten($mainMyGene, 20% );
+    }
+}
+.mV{
+  background: $mainMyVariant;
+  &:hover {
+        background: lighten($mainMyVariant, 20% );
+    }
+}
+.mC{
+  background: $mainMyChem;
+  &:hover {
+        background: lighten($mainMyChem, 20% );
+    }
+}
+
+//Animations
 
 @-webkit-keyframes neon2 {
   from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px $mainMyGene, 0 0 70px $mainMyGene, 0 0 80px $mainMyGene, 0 0 100px $mainMyGene, 0 0 150px $mainMyGene;
   }
   to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px $mainMyGene, 0 0 35px $mainMyGene, 0 0 40px $mainMyGene, 0 0 50px $mainMyGene, 0 0 75px $mainMyGene;
   }
 }
 
+@-webkit-keyframes neonVariant {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px $mainMyVariant, 0 0 70px $mainMyVariant, 0 0 80px $mainMyVariant, 0 0 100px $mainMyVariant, 0 0 150px $mainMyVariant;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px $mainMyVariant, 0 0 35px $mainMyVariant, 0 0 40px $mainMyVariant, 0 0 50px $mainMyVariant, 0 0 75px $mainMyVariant;
+  }
+}
+
+// HELPERS
 .flex{
   display: flex;
 }
@@ -58,6 +116,12 @@ $blue: #2395cd;
   font-size: 5em;
   -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
   animation: neon2 1.5s ease-in-out infinite alternate;
+}
+
+.activeUsers-MyVariant{
+  font-size: 5em;
+  -webkit-animation: neonVariant 1.5s ease-in-out infinite alternate;
+  animation: neonVariant 1.5s ease-in-out infinite alternate;
 }
 
 .twoEM{
@@ -186,6 +250,30 @@ h1,h2,h3,h4,h5{
 }
 .btn-grey {
    @include button-bg(#aaaaaa);
+}
+
+.bg-white{
+  background: white;
+}
+
+.toggleNav{
+  background: #b9b9b9;
+  display: flex;
+  justify-content:flex-start;
+  flex-wrap: wrap;
+  a{
+    text-align: center;
+    border-radius: 5px;
+    flex: 1;
+    margin: 5px;
+    max-width: 150px;
+    padding: 10px;
+    text-decoration: none;
+    &:hover{
+      background: #464646;
+    }
+  }
+
 }
 
 .users-gradient{

@@ -17,7 +17,7 @@ class ChartComp extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('props received', this.props.chartData);
+    // console.log('props received', this.props.chartData);
 
     let arr = this.props.chartData;
 
@@ -34,6 +34,7 @@ class ChartComp extends React.Component {
           },
           options: {
             responsive: true,
+            mode: null,
             legend: { display: false },
             title: {
               display: true,

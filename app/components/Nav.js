@@ -21,12 +21,13 @@ export default class Nav extends React.Component {
       <header>
         <nav className="header">
           <Link className="logo" to="/">
-            <img src='img/biostats.svg' width="100px"/>
+            {/* <img src='img/biostats.svg' width="100px"/> */}
+            BioStats
           </Link>
           <div className="header-right">
             <Login/>
           </div>
-        </nav>      
+        </nav>
       </header>
     );
   }

@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux'
 import axios from 'axios';
-import DataPanel from './DataPanel';
+import MyGenePanel from './MyGenePanel';
+import MyVariantPanel from './MyVariantPanel';
 
 class Home extends React.Component {
 
@@ -65,11 +66,26 @@ class Home extends React.Component {
   render() {
     return (
       <section className="margin0Auto" >
-        <nav className="header" style={{background:'#676767'}}>
-            <Link className="" to='#'>MyGene</Link>
-            <Link className="" to='#'>MyVariant</Link>
-        </nav>
-        {this.state.display === 'MyGene' && <DataPanel/>}
+        {this.props.user.name && !this.state.display &&
+          <nav className="toggleNav">
+              <Link onClick={()=>{this.handleKeyPressed('')}} className="bg-white" to='#'>Home</Link>
+              <Link onClick={()=>{this.handleKeyPressed('1')}} className="mG whiteText" style={{margin:'3px'}} to='#'>MyGene (key 1)</Link>
+              <Link onClick={()=>{this.handleKeyPressed('2')}} className="mV whiteText" style={{margin:'3px'}} to='#'>MyVariant (key 2)</Link>
+              <Link onClick={()=>{this.handleKeyPressed('3')}} className="mC whiteText" style={{margin:'3px'}} to='#'>MyChem (key 3)</Link>
+          </nav>
+        }
+        {!this.props.user.name &&
+          <nav className="toggleNav" style={{background:'#ffe68f', color:'#934d3e'}}>
+            <p style={{textAlign:'center', width:'100%'}}>You must be logged in to view realtime data</p>
+          </nav>
+        }
+        {this.state.display === 'MyGene' && <MyGenePanel/>}
+        {this.state.display === 'MyVariant' && <MyVariantPanel/>}
+        {!this.state.display &&
+        <div className='padding20' style={{textAlign:'center', padding:'30vh 10vw'}}>
+          <img style={{width:'50vw'}} src='img/biostats.svg'></img>
+          <h2>Realtime Analytics API</h2>
+        </div>}
       </section>
     );
   }
@@ -79,7 +95,7 @@ class Home extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    something : state.something
+    user : state.user
   }
 }
 

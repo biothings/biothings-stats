@@ -50,7 +50,7 @@ class ReactMap extends React.Component {
       .translate([ 800 / 2, 450 / 2 ])
   }
   handleCountryClick(countryIndex) {
-    console.log("Clicked on country: ", this.state.worlddata[countryIndex])
+    // console.log("Clicked on country: ", this.state.worlddata[countryIndex])
   }
   handleMarkerHover(markerIndex) {
     this.setState({
