@@ -11,6 +11,7 @@ import {Router} from 'react-router-dom';
 import Home from '../app/components/Home';
 import Test from '../app/components/Test';
 import Nav from '../app/components/Nav';
+import Footer from '../app/components/Footer';
 import NotFound from '../app/components/NotFound';
 // import { HashRouter } from 'react-router-dom';
 
@@ -51,6 +52,7 @@ export default (
             <Route path="/marco" component={Test}/>
             <Route component={NotFound}/>
           </Switch>
+          <Footer></Footer>
       </Fragment>
     </Router>
     </Provider>

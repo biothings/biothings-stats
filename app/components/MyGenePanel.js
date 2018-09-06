@@ -147,6 +147,7 @@ class MyGenePanel extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.timer);
+    this.props.sendMapData([]);
   }
 
   render() {
@@ -184,14 +185,14 @@ class MyGenePanel extends React.Component {
         {/* <h2 className="whiteText">Total Users</h2>
         <h1 className="whiteText">{this.state.totalUsers}</h1> */}
           {this.state.pages.length &&
-            <table style={{margin:'auto'}}>
-              <thead className='margin20'>
-                <th className="whiteText bold padding20" style={{border:'1px solid white'}}>
+            <table style={{margin:'auto'}} className="pagesTable">
+              <thead className='margin20' >
+                <th className="whiteText bold" >
                   Top Pages Visited
                 </th>
                 {this.state.pages.map( (page,i)=>{
                   return (
-                    <th className="whiteText padding20" style={{border:'1px solid white'}} key={i}>
+                    <th  key={i}>
                       { page }
                     </th>
                   )

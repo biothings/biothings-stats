@@ -35,22 +35,22 @@ class Login extends React.Component {
           onUpdateSigninStatus={this.handleLogin}
         >
         <div>
-        	{!this.props.user.name && <div> <CustomGoogleLogin tag="a" text='login' />
+        	{!this.props.user.name && <div id='loginbtn'> <CustomGoogleLogin tag="a" text='login' />
           <svg version="1.1" id="Layer_1" x="0px" y="0px" width="40px" height="40px"
            viewBox="0 0 40 40" style={{enableBackground:"new 0 0 40 40"}}>
-            <g fill='#85e849'>
+            <g fill='#414141'>
             <circle cx="20" cy="20" r="17"/>
             </g>
-            <polygon fill='white' points="25.8,10 14.2,10 8.5,20 14.2,30 25.8,30 31.5,20 "/>
+            <polygon fill='#85e849' points="25.8,10 14.2,10 8.5,20 14.2,30 25.8,30 31.5,20 "/>
           </svg>
           </div>}
-        	{this.props.user.name && <div> <CustomGoogleLogout tag="a" text={'logout '+ this.props.user.givenName} onLogoutSuccess={this.handleLogout}/>
+        	{this.props.user.name && <div id='logoutbtn'> <CustomGoogleLogout tag="a" text={'logout '+ this.props.user.givenName} onLogoutSuccess={this.handleLogout}/>
           <svg version="1.1" id="Layer_1" x="0px" y="0px" width="40px" height="40px"
            viewBox="0 0 40 40" style={{enableBackground:"new 0 0 40 40"}}>
-            <g fill='#f06060'>
+            <g fill='#414141'>
             <circle cx="20" cy="20" r="17"/>
             </g>
-            <polygon fill='white' points="25.8,10 14.2,10 8.5,20 14.2,30 25.8,30 31.5,20 "/>
+            <polygon fill='#f06060' points="25.8,10 14.2,10 8.5,20 14.2,30 25.8,30 31.5,20 "/>
           </svg>
           </div>}
     		</div>

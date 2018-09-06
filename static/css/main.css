@@ -1,53 +1,126 @@
+.pagesTable thead th:nth-child(1) {
+  background: #ff0800;
+  border: 2px solid #fff700; }
+
+.pagesTable thead th:nth-child(2) {
+  background: #ff2100;
+  border: 2px solid #ffde00; }
+
+.pagesTable thead th:nth-child(3) {
+  background: #ff3b00;
+  border: 2px solid #ffc400; }
+
+.pagesTable thead th:nth-child(4) {
+  background: #ff5400;
+  border: 2px solid #ffab00; }
+
+.pagesTable thead th:nth-child(5) {
+  background: #ff6e00;
+  border: 2px solid #ff9100; }
+
+.pagesTable thead th:nth-child(6) {
+  background: #ff8700;
+  border: 2px solid #ff7800; }
+
+.pagesTable thead th:nth-child(7) {
+  background: #ffa100;
+  border: 2px solid #ff5e00; }
+
+.pagesTable thead th:nth-child(8) {
+  background: #ffba00;
+  border: 2px solid orangered; }
+
+.pagesTable thead th:nth-child(9) {
+  background: #ffd400;
+  border: 2px solid #ff2b00; }
+
+.pagesTable thead th:nth-child(10) {
+  background: #ffed00;
+  border: 2px solid #ff1200; }
+
+.pagesTable thead th:first-child {
+  background: transparent;
+  border: 0;
+  color: white; }
+  .pagesTable thead th:first-child:hover {
+    background: transparent;
+    border: 0;
+    color: white; }
+
+.pagesTable thead th {
+  padding: 7px;
+  border-radius: 10px;
+  margin: 2px 5px;
+  color: white;
+  min-width: 130px; }
+  .pagesTable thead th:hover {
+    background: white;
+    color: #2e2e2e;
+    cursor: default; }
+
 .mG-back {
-  /* fallback/image non-cover color */
-  background-color: #3366CC;
-  /* Firefox 3.6+ */
-  background-image: -moz-linear-gradient(#3366CC, #213542);
-  /* Safari 4+, Chrome 1+ */
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3366CC), to(#213542));
-  /* Safari 5.1+, Chrome 10+ */
-  background-image: -webkit-linear-gradient(#3366CC, #213542);
-  /* Opera 11.10+ */
-  background-image: -o-linear-gradient(#3366CC, #213542); }
+  background: #213542;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #213542, #213542 21%, #3366CC 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #213542 0%, #213542 21%, #3366CC 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #213542 0%, #213542 21%, #3366CC 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background-image: -o-linear-gradient(#213542, #3366CC); }
 
 .mV-back {
-  /* fallback/image non-cover color */
-  background-color: #40B307;
-  /* Firefox 3.6+ */
-  background-image: -moz-linear-gradient(#40B307, #213542);
-  /* Safari 4+, Chrome 1+ */
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#40B307), to(#213542));
-  /* Safari 5.1+, Chrome 10+ */
-  background-image: -webkit-linear-gradient(#40B307, #213542);
-  /* Opera 11.10+ */
-  background-image: -o-linear-gradient(#40B307, #213542); }
+  background: #213542;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #213542, #213542 21%, #40B307 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #213542 0%, #213542 21%, #40B307 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #213542 0%, #213542 21%, #40B307 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background-image: -o-linear-gradient(#213542, #40B307); }
 
 .mC-back {
-  /* fallback/image non-cover color */
-  background-color: #FD7400;
-  /* Firefox 3.6+ */
-  background-image: -moz-linear-gradient(#FD7400, #213542);
-  /* Safari 4+, Chrome 1+ */
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FD7400), to(#213542));
-  /* Safari 5.1+, Chrome 10+ */
-  background-image: -webkit-linear-gradient(#FD7400, #213542);
-  /* Opera 11.10+ */
-  background-image: -o-linear-gradient(#FD7400, #213542); }
+  background: #213542;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #213542, #213542 21%, #FD7400 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #213542 0%, #213542 21%, #FD7400 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #213542 0%, #213542 21%, #FD7400 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background-image: -o-linear-gradient(#213542, #FD7400); }
+
+.mB-back {
+  background: #213542;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #213542, #213542 21%, #CE952B 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #213542 0%, #213542 21%, #CE952B 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #213542 0%, #213542 21%, #CE952B 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background-image: -o-linear-gradient(#213542, #CE952B); }
 
 .mG {
   background: #3366CC; }
   .mG:hover {
-    background: #85a3e0; }
+    background: #85a3e0 !important; }
 
 .mV {
   background: #40B307; }
   .mV:hover {
-    background: #6df729; }
+    background: #6df729 !important; }
 
 .mC {
   background: #FD7400; }
   .mC:hover {
-    background: #ffab64; }
+    background: #ffab64 !important; }
+
+.mB {
+  background: #FCCA52; }
+  .mB:hover {
+    background: #fee9b6 !important; }
 
 @-webkit-keyframes neon2 {
   from {
@@ -60,6 +133,18 @@
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #40B307, 0 0 70px #40B307, 0 0 80px #40B307, 0 0 100px #40B307, 0 0 150px #40B307; }
   to {
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #40B307, 0 0 35px #40B307, 0 0 40px #40B307, 0 0 50px #40B307, 0 0 75px #40B307; } }
+
+@-webkit-keyframes neonChem {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FD7400, 0 0 70px #FD7400, 0 0 80px #FD7400, 0 0 100px #FD7400, 0 0 150px #FD7400; }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FD7400, 0 0 35px #FD7400, 0 0 40px #FD7400, 0 0 50px #FD7400, 0 0 75px #FD7400; } }
+
+@-webkit-keyframes neonBioThings {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FCCA52, 0 0 70px #FCCA52, 0 0 80px #FCCA52, 0 0 100px #FCCA52, 0 0 150px #FCCA52; }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FCCA52, 0 0 35px #FCCA52, 0 0 40px #FCCA52, 0 0 50px #FCCA52, 0 0 75px #FCCA52; } }
 
 .flex {
   display: flex; }
@@ -100,7 +185,8 @@
   /* IE6-9 */
   padding: 20px;
   border-radius: 15px;
-  border: white 2px solid; }
+  border: lightgrey 5px solid;
+  box-shadow: 6px 6px 25px black; }
 
 .activeUsers-MyGene {
   font-size: 5em;
@@ -111,6 +197,16 @@
   font-size: 5em;
   -webkit-animation: neonVariant 1.5s ease-in-out infinite alternate;
   animation: neonVariant 1.5s ease-in-out infinite alternate; }
+
+.activeUsers-MyChem {
+  font-size: 5em;
+  -webkit-animation: neonChem 1.5s ease-in-out infinite alternate;
+  animation: neonChem 1.5s ease-in-out infinite alternate; }
+
+.activeUsers-BioThings {
+  font-size: 5em;
+  -webkit-animation: neonBioThings 1.5s ease-in-out infinite alternate;
+  animation: neonBioThings 1.5s ease-in-out infinite alternate; }
 
 .twoEM {
   font-size: 2em; }
@@ -149,7 +245,7 @@ h1, h2, h3, h4, h5 {
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 .header {
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: #414141;
   padding: 5px; }
   .header a {
     float: left;
@@ -161,11 +257,9 @@ h1, h2, h3, h4, h5 {
     line-height: 20px;
     border-radius: 4px;
     font-family: sans-serif; }
-    .header a:hover {
-      background-color: #ddd;
-      color: black; }
   .header a.logo {
     font-size: 25px;
+    color: white;
     font-weight: lighter; }
   .header a.active {
     background-color: #2395cd;
@@ -190,28 +284,36 @@ h1, h2, h3, h4, h5 {
   font-family: sans-serif; }
 
 .btn-green {
-  background: #2ecc71; }
+  background: #40B307; }
   .btn-green:hover {
-    background: #26ab5f;
+    background: #328c05;
     transition: all 0.3s ease; }
   .btn-green:active {
-    background: #176437; }
+    background: #143802; }
 
 .btn-blue {
-  background: #3498db; }
+  background: #3366CC; }
   .btn-blue:hover {
-    background: #2383c4;
+    background: #2b56ab;
     transition: all 0.3s ease; }
   .btn-blue:active {
-    background: #16527a; }
+    background: #1a3366; }
 
 .btn-yellow {
-  background: #f1c40f; }
+  background: #FCCA52; }
   .btn-yellow:hover {
-    background: #cba50c;
+    background: #fbbe2a;
     transition: all 0.3s ease; }
   .btn-yellow:active {
-    background: #796307; }
+    background: #cb9004; }
+
+.btn-orange {
+  background: #FD7400; }
+  .btn-orange:hover {
+    background: #d46100;
+    transition: all 0.3s ease; }
+  .btn-orange:active {
+    background: #7e3a00; }
 
 .btn-red {
   background: #e74c3c; }
@@ -247,6 +349,70 @@ h1, h2, h3, h4, h5 {
     text-decoration: none; }
     .toggleNav a:hover {
       background: #464646; }
+
+#logoutbtn {
+  background: #e85349;
+  border-radius: 10px;
+  border: 2px solid lightgrey;
+  box-shadow: 2px 2px 2px grey;
+  margin-right: 10px;
+  display: inline-flex; }
+  #logoutbtn:hover {
+    background: #ee7e76;
+    cursor: pointer; }
+    #logoutbtn:hover a {
+      color: white; }
+
+#loginbtn {
+  background: #85e849;
+  border-radius: 10px;
+  border: 2px solid lightgrey;
+  box-shadow: 2px 2px 2px grey;
+  margin-right: 10px;
+  display: inline-flex; }
+  #loginbtn:hover {
+    background: #a3ee76;
+    cursor: pointer; }
+    #loginbtn:hover a {
+      color: white; }
+
+#footer {
+  background: #414141;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100vw; }
+  #footer p {
+    color: #797979;
+    font-size: .7em; }
+
+.st0 {
+  fill: #4D4D4D; }
+
+.st1 {
+  fill: #FFFFFF; }
+
+.st2 {
+  fill: #D3D3D3; }
+
+.st3 {
+  fill: #F15A24; }
+
+.st4 {
+  fill: #C1272D; }
+
+.st5 {
+  fill: #F7931E; }
+
+.st6 {
+  fill: #FBB03B; }
+
+.st7 {
+  fill: #ED1C24; }
+
+.st8 {
+  fill: #333333; }
 
 .users-gradient {
   width: 50%;

@@ -21,7 +21,7 @@ class MyVariantPanel extends React.Component {
         realtimeApiURL : 'https://www.googleapis.com/analytics/v3/data/realtime?ids=ga:',
         analyticsApiURL : 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga:',
         options : '&start-date=30daysAgo&end-date=yesterday&metrics=rt:activeUsers&dimensions=rt:userType',
-        mygeneViewID : '51012565',
+        viewID : '101990787',
         apiOptions : '',
         activeUsers: 0,
         totalUsers: 0,
@@ -58,7 +58,7 @@ class MyVariantPanel extends React.Component {
     let _authResp = googleGetAuthResponse();
     axios.get(
         this.state.realtimeApiURL
-      + this.state.mygeneViewID
+      + this.state.viewID
       + this.state.options
       + "&access_token="
       + _authResp.accessToken).then(res=>{
@@ -85,7 +85,7 @@ class MyVariantPanel extends React.Component {
     let _authResp = googleGetAuthResponse();
     axios.get(
       this.state.analyticsApiURL
-      + this.state.mygeneViewID
+      + this.state.viewID
       +'&start-date=30daysAgo&end-date=yesterday'
       +'&metrics=ga:users,ga:sessions'
       +'&dimensions=ga:country,ga:region,ga:city,ga:latitude,ga:longitude,ga:pagePath'
@@ -147,6 +147,7 @@ class MyVariantPanel extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.timer);
+    this.props.sendMapData([]);
   }
 
   render() {
@@ -184,14 +185,14 @@ class MyVariantPanel extends React.Component {
         {/* <h2 className="whiteText">Total Users</h2>
         <h1 className="whiteText">{this.state.totalUsers}</h1> */}
           {this.state.pages.length &&
-            <table style={{margin:'auto'}}>
+            <table style={{margin:'auto'}} className="pagesTable">
               <thead className='margin20'>
-                <th className="whiteText bold padding20" style={{border:'1px solid white'}}>
+                <th className="whiteText bold">
                   Top Pages Visited
                 </th>
                 {this.state.pages.map( (page,i)=>{
                   return (
-                    <th className="whiteText padding20" style={{border:'1px solid white'}} key={i}>
+                    <th key={i}>
                       { page }
                     </th>
                   )

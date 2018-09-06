@@ -1,6 +1,8 @@
 $mainMyGene: #3366CC;
 $mainMyChem: #FD7400;
 $mainMyVariant: #40B307;
+$mainBioThings: #FCCA52;
+$mainBioThingsDarker: #CE952B;
 $white: black;
 $black: white;
 $font_family_1: sans-serif;
@@ -11,20 +13,52 @@ $blue: #2395cd;
 //MIXINS
 
 @mixin gradient($from, $to) {
-  /* fallback/image non-cover color */
-  background-color: $from;
+  // background-color: $from;
+  // background-image: -moz-linear-gradient($from, $to);
+  // background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
+  // background-image: -webkit-linear-gradient($from, $to);
 
-  /* Firefox 3.6+ */
-  background-image: -moz-linear-gradient($from, $to);
 
-  /* Safari 4+, Chrome 1+ */
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
+background: $to; /* Old browsers */
+background: -moz-linear-gradient(top, $to, $to 21%, $from 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, $to 0%,$to 21%,$from 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, $to 0%,$to 21%,$from 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+background-image: -o-linear-gradient($to, $from);
 
-  /* Safari 5.1+, Chrome 10+ */
-  background-image: -webkit-linear-gradient($from, $to);
+}
 
-  /* Opera 11.10+ */
-  background-image: -o-linear-gradient($from, $to);
+$percent-color:3%;
+
+@for $i from 1 through 10 {
+  .pagesTable thead th:nth-child(#{$i}) {
+    background: mix(yellow , red, $percent-color);
+    border: 2px solid mix(red , yellow, $percent-color);
+  }
+  $percent-color : $percent-color + 10%;
+}
+
+.pagesTable thead th:first-child{
+  background: transparent;
+  border:0;
+  color:white;
+  &:hover{
+    background: transparent;
+    border:0;
+    color:white;
+  }
+}
+
+.pagesTable thead th{
+  padding: 7px;
+  border-radius: 10px;
+  margin:2px 5px;
+  color:white;
+  min-width: 130px;
+  &:hover{
+    background: white;
+    color: #2e2e2e;
+    cursor: default;
+  }
 }
 
 .mG-back{
@@ -36,23 +70,32 @@ $blue: #2395cd;
 .mC-back{
   @include gradient($mainMyChem, #213542);
 }
+.mB-back{
+  @include gradient($mainBioThingsDarker, #213542);
+}
 
 .mG{
   background: $mainMyGene;
   &:hover {
-        background: lighten($mainMyGene, 20% );
+        background: lighten($mainMyGene, 20% ) !important;
     }
 }
 .mV{
   background: $mainMyVariant;
   &:hover {
-        background: lighten($mainMyVariant, 20% );
+        background: lighten($mainMyVariant, 20% ) !important;
     }
 }
 .mC{
   background: $mainMyChem;
   &:hover {
-        background: lighten($mainMyChem, 20% );
+        background: lighten($mainMyChem, 20% ) !important;
+    }
+}
+.mB{
+  background: $mainBioThings;
+  &:hover {
+        background: lighten($mainBioThings, 20% ) !important;
     }
 }
 
@@ -73,6 +116,24 @@ $blue: #2395cd;
   }
   to {
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px $mainMyVariant, 0 0 35px $mainMyVariant, 0 0 40px $mainMyVariant, 0 0 50px $mainMyVariant, 0 0 75px $mainMyVariant;
+  }
+}
+
+@-webkit-keyframes neonChem {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px $mainMyChem, 0 0 70px $mainMyChem, 0 0 80px $mainMyChem, 0 0 100px $mainMyChem, 0 0 150px $mainMyChem;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px $mainMyChem, 0 0 35px $mainMyChem, 0 0 40px $mainMyChem, 0 0 50px $mainMyChem, 0 0 75px $mainMyChem;
+  }
+}
+
+@-webkit-keyframes neonBioThings {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px $mainBioThings, 0 0 70px $mainBioThings, 0 0 80px $mainBioThings, 0 0 100px $mainBioThings, 0 0 150px $mainBioThings;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px $mainBioThings, 0 0 35px $mainBioThings, 0 0 40px $mainBioThings, 0 0 50px $mainBioThings, 0 0 75px $mainBioThings;
   }
 }
 
@@ -109,7 +170,8 @@ $blue: #2395cd;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
   padding: 20px;
   border-radius: 15px;
-  border: white 2px solid;
+  border: lightgrey 5px solid;
+  box-shadow: 6px 6px 25px black;
 }
 
 .activeUsers-MyGene{
@@ -122,6 +184,18 @@ $blue: #2395cd;
   font-size: 5em;
   -webkit-animation: neonVariant 1.5s ease-in-out infinite alternate;
   animation: neonVariant 1.5s ease-in-out infinite alternate;
+}
+
+.activeUsers-MyChem{
+  font-size: 5em;
+  -webkit-animation: neonChem 1.5s ease-in-out infinite alternate;
+  animation: neonChem 1.5s ease-in-out infinite alternate;
+}
+
+.activeUsers-BioThings{
+  font-size: 5em;
+  -webkit-animation: neonBioThings 1.5s ease-in-out infinite alternate;
+  animation: neonBioThings 1.5s ease-in-out infinite alternate;
 }
 
 .twoEM{
@@ -172,7 +246,7 @@ h1,h2,h3,h4,h5{
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 .header {
 	overflow: hidden;
-	background-color: $light-grey;
+	background-color: #414141;
 	padding: 5px;
 	a {
 		float: left;
@@ -184,13 +258,14 @@ h1,h2,h3,h4,h5{
 		line-height: 20px;
 		border-radius: 4px;
 		font-family: $font_family_1;
-		&:hover {
-			background-color: $light-grey2;
-			color: $white;
-		}
+		// &:hover {
+		// 	background-color: $light-grey2;
+		// 	color: $white;
+		// }
 	}
 	a.logo {
 		font-size: 25px;
+    color: white;
 		font-weight: lighter;
 	}
 	a.active {
@@ -234,15 +309,19 @@ h1,h2,h3,h4,h5{
 }
 
 .btn-green {
-   @include button-bg(#2ecc71);
+   @include button-bg($mainMyVariant);
 }
 
 .btn-blue {
-   @include button-bg(#3498db);
+   @include button-bg($mainMyGene);
 }
 
 .btn-yellow{
-   @include button-bg(#f1c40f);
+   @include button-bg($mainBioThings);
+}
+
+.btn-orange{
+   @include button-bg($mainMyChem);
 }
 
 .btn-red {
@@ -275,6 +354,61 @@ h1,h2,h3,h4,h5{
   }
 
 }
+
+#logoutbtn{
+  background: #e85349;
+  border-radius: 10px;
+  border: 2px solid lightgrey;
+  box-shadow: 2px 2px 2px grey;
+  margin-right: 10px;
+  display: inline-flex;
+  &:hover{
+    background: lighten(#e85349,10%);
+    cursor: pointer;
+    a{
+      color:white;
+    }
+  }
+}
+
+#loginbtn{
+  background: #85e849;
+  border-radius: 10px;
+  border: 2px solid lightgrey;
+  box-shadow: 2px 2px 2px grey;
+  margin-right: 10px;
+  display: inline-flex;
+  &:hover{
+    background: lighten(#85e849,10%);
+    cursor: pointer;
+    a{
+      color:white;
+    }
+  }
+}
+
+#footer{
+  background: #414141;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  p{
+    color: #797979;
+    font-size: .7em;
+  }
+}
+
+.st0{fill:#4D4D4D;}
+.st1{fill:#FFFFFF;}
+.st2{fill:#D3D3D3;}
+.st3{fill:#F15A24;}
+.st4{fill:#C1272D;}
+.st5{fill:#F7931E;}
+.st6{fill:#FBB03B;}
+.st7{fill:#ED1C24;}
+.st8{fill:#333333;}
 
 .users-gradient{
   width: 50%;

@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import axios from 'axios';
 import MyGenePanel from './MyGenePanel';
 import MyVariantPanel from './MyVariantPanel';
+import MyChemPanel from './MyChemPanel';
+import BioThingsPanel from './BioThingsPanel';
+import Welcome from './Welcome';
 
 class Home extends React.Component {
 
@@ -46,9 +49,14 @@ class Home extends React.Component {
             display: 'MyChem'
           })
         break;
+      case '4':
+          this.setState({
+            display: 'BioThings'
+          })
+        break;
       default:
         this.setState({
-          display: 'BioThings'
+          display: ''
         })
     }
     console.log(this.state.display)
@@ -72,6 +80,7 @@ class Home extends React.Component {
               <Link onClick={()=>{this.handleKeyPressed('1')}} className="mG whiteText" style={{margin:'3px'}} to='#'>MyGene (key 1)</Link>
               <Link onClick={()=>{this.handleKeyPressed('2')}} className="mV whiteText" style={{margin:'3px'}} to='#'>MyVariant (key 2)</Link>
               <Link onClick={()=>{this.handleKeyPressed('3')}} className="mC whiteText" style={{margin:'3px'}} to='#'>MyChem (key 3)</Link>
+              <Link onClick={()=>{this.handleKeyPressed('4')}} className="mB whiteText" style={{margin:'3px'}} to='#'>BioThings (key 4)</Link>
           </nav>
         }
         {!this.props.user.name &&
@@ -81,11 +90,9 @@ class Home extends React.Component {
         }
         {this.state.display === 'MyGene' && <MyGenePanel/>}
         {this.state.display === 'MyVariant' && <MyVariantPanel/>}
-        {!this.state.display &&
-        <div className='padding20' style={{textAlign:'center', padding:'30vh 10vw'}}>
-          <img style={{width:'50vw'}} src='img/biostats.svg'></img>
-          <h2>Realtime Analytics API</h2>
-        </div>}
+        {this.state.display === 'MyChem' && <MyChemPanel/>}
+        {this.state.display === 'BioThings' && <BioThingsPanel/>}
+        {!this.state.display && <Welcome/>}
       </section>
     );
   }

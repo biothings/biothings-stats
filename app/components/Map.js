@@ -103,7 +103,7 @@ class ReactMap extends React.Component {
                     key={ `path-${ i }` }
                     d={ geoPath().projection(this.projection())(d) }
                     className="country"
-                    fill={ `rgba(38,50,56,${ 1 / this.state.worlddata.length * i})` }
+                    fill={ `rgba(38,50,56,0.4)` }
                     stroke="#FFFFFF"
                     strokeWidth={ 0.5 }
                     onClick={ () => this.handleCountryClick(i) }
