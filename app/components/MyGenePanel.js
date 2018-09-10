@@ -21,7 +21,7 @@ class MyGenePanel extends React.Component {
         realtimeApiURL : 'https://www.googleapis.com/analytics/v3/data/realtime?ids=ga:',
         analyticsApiURL : 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga:',
         options : '&start-date=30daysAgo&end-date=yesterday&metrics=rt:activeUsers&dimensions=rt:userType',
-        mygeneViewID : '51012565',
+        viewID : '51012565',
         apiOptions : '',
         activeUsers: 0,
         totalUsers: 0,
@@ -30,19 +30,74 @@ class MyGenePanel extends React.Component {
         mapData:[],
         pages: [],
         activeUsersHistory:[],
-        timer: null
+        timer: null,
+        devices:[]
     }
     this.fetchRealTimeData = this.fetchRealTimeData.bind(this);
     this.fetchAnalyticsData = this.fetchAnalyticsData.bind(this);
     this.shapeData = this.shapeData.bind(this);
     this.shapeMapData = this.shapeMapData.bind(this);
+    this.fetchDeviceData = this.fetchDeviceData.bind(this);
+    this.shapeDevices = this.shapeDevices.bind(this);
+    this.addComma = this.addComma.bind(this);
     this.getUniqueItemsInTopPages = this.getUniqueItemsInTopPages.bind(this);
+  }
+
+  addComma(number){
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  fetchDeviceData(){
+    let _authResp = googleGetAuthResponse();
+    axios.get(
+      this.state.analyticsApiURL
+      + this.state.viewID
+      +'&start-date=30daysAgo&end-date=yesterday'
+      +'&metrics=ga:users'
+      +'&dimensions=ga:deviceCategory'
+      +'&sort=-ga:users'
+      +'&max-results=10'
+      + "&access_token="
+      + _authResp.accessToken).then(res=>{
+
+        if (res.data.rows) {
+          this.shapeDevices(res.data.rows);
+        }
+
+      }).catch(err=>{
+        throw err;
+      })
+  }
+
+  shapeDevices(rows){
+    let res =[];
+
+    for (var i = 0; i < rows.length; i++) {
+      switch (rows[i][0]) {
+        case 'desktop':
+          res.push({'name':rows[i][0],'users': this.addComma(rows[i][1]),'image':'img/desktop.svg'})
+          break;
+        case 'tablet':
+          res.push({'name':rows[i][0],'users': this.addComma(rows[i][1]),'image':'img/tablet.svg'})
+          break;
+        case 'mobile':
+          res.push({'name':rows[i][0],'users': this.addComma(rows[i][1]),'image':'img/mobile.svg'})
+          break;
+        default:
+
+      }
+    }
+    this.setState({
+      'devices': res
+    })
   }
 
   getUniqueItemsInTopPages(list){
     let pages =[]
 
     for (var i = 0; i < this.state.results.length; i++) {
+      if (this.state.results[i][5] === '/') {
+        this.state.results[i][5] = 'mygene.info/'
+      }
       pages.push(this.state.results[i][5])
     }
 
@@ -58,7 +113,7 @@ class MyGenePanel extends React.Component {
     let _authResp = googleGetAuthResponse();
     axios.get(
         this.state.realtimeApiURL
-      + this.state.mygeneViewID
+      + this.state.viewID
       + this.state.options
       + "&access_token="
       + _authResp.accessToken).then(res=>{
@@ -85,7 +140,7 @@ class MyGenePanel extends React.Component {
     let _authResp = googleGetAuthResponse();
     axios.get(
       this.state.analyticsApiURL
-      + this.state.mygeneViewID
+      + this.state.viewID
       +'&start-date=30daysAgo&end-date=yesterday'
       +'&metrics=ga:users,ga:sessions'
       +'&dimensions=ga:country,ga:region,ga:city,ga:latitude,ga:longitude,ga:pagePath'
@@ -98,6 +153,8 @@ class MyGenePanel extends React.Component {
       throw err;
     })
   }
+
+
 
 
   shapeData(data){
@@ -134,9 +191,9 @@ class MyGenePanel extends React.Component {
     var self = this;
     if (this.props.user.name) {
       this.fetchRealTimeData();
+      this.fetchDeviceData();
       this.fetchAnalyticsData();
       this.timer =setInterval(function(){
-        console.log('mygene timer');
         self.setState({
           lastActiveUsers: self.state.activeUsers
         })
@@ -153,19 +210,10 @@ class MyGenePanel extends React.Component {
   render() {
     return (
       <section className="margin0Auto padding20 centerText mG-back">
-        <img src="img/mygene-text.png" width="300px" className="margin20"/>
-        <button style={{position:'absolute', right:'20px'}} disabled={this.props.user.name ? false : true} className={"btn " + (this.props.user.name ? 'btn-blue' : 'btn-grey') } onClick={this.fetchRealTimeData}>Refresh</button>
-        {/* <div className="activeUsersBoxTest margin20">
-          <h2 className="whiteText">Active Users Right Now</h2>
-          {this.state.activeUsers &&
-            <CountUp  className="whiteText activeUsers-MyGene"
-                      start={this.state.lastActiveUsers}
-                      end={this.state.activeUsers}
-                      duration={3}
-                      separator=","/>
-          }
-          <Chart chartData={this.state.activeUsersHistory}/>
-        </div> */}
+        <div style={{width:'100%', clear:'both'}}>
+          <img src="img/mygene-text.png" width="300px" className="margin20"/>
+          <button style={{position:'absolute', right:'20px'}} disabled={this.props.user.name ? false : true} className={"btn " + (this.props.user.name ? 'btn-blue' : 'btn-grey') } onClick={this.fetchRealTimeData}>Refresh</button>
+        </div>
         <div className="activeUsersBoxTest margin20 flex" style={{width:'50%', margin:'auto'}}>
           <div style={{flex:1}}>
             <h2 className="whiteText">Active Users Right Now</h2>
@@ -177,15 +225,31 @@ class MyGenePanel extends React.Component {
           </div>
           <Chart chartData={this.state.activeUsersHistory}/>
         </div>
-        <div style={{width:'300px', margin:'auto'}}>
-
-
-        </div>
         <br/>
-        {/* <h2 className="whiteText">Total Users</h2>
-        <h1 className="whiteText">{this.state.totalUsers}</h1> */}
+        <table className='deviceContainer'>
+          <tbody>
+            <tr className="device">
+              <td>
+                Top 3 Devices
+              </td>
+            </tr>
+            {this.state.devices.map( (device,index)=>{
+              return(
+                <tr className="device" key={index}>
+                  <td>
+                    <img src={device.image} alt={device.name} width='25px'/>
+                  </td>
+                  <td>
+                    {device.users} users
+                  </td>
+                </tr>
+              )
+            })}
+        </tbody>
+        </table>
+        <br/>
           {this.state.pages.length &&
-            <table style={{margin:'auto'}} className="pagesTable">
+            <table style={{margin:'auto', clear:'both'}} className="pagesTable">
               <thead className='margin20' >
                 <th className="whiteText bold" >
                   Top Pages Visited

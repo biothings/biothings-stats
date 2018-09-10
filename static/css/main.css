@@ -1,42 +1,56 @@
 .pagesTable thead th:nth-child(1) {
-  background: #ff0800;
-  border: 2px solid #fff700; }
+  background: #f80507;
+  border: 2px solid #fff7f7; }
 
 .pagesTable thead th:nth-child(2) {
-  background: #ff2100;
-  border: 2px solid #ffde00; }
+  background: #d21e27;
+  border: 2px solid #ffd1d1; }
 
 .pagesTable thead th:nth-child(3) {
-  background: #ff3b00;
-  border: 2px solid #ffc400; }
+  background: #ad3748;
+  border: 2px solid #ffabab; }
 
 .pagesTable thead th:nth-child(4) {
-  background: #ff5400;
-  border: 2px solid #ffab00; }
+  background: #875069;
+  border: 2px solid #ff8585; }
 
 .pagesTable thead th:nth-child(5) {
-  background: #ff6e00;
-  border: 2px solid #ff9100; }
+  background: #626989;
+  border: 2px solid #ff5e5e; }
 
 .pagesTable thead th:nth-child(6) {
-  background: #ff8700;
-  border: 2px solid #ff7800; }
+  background: #3c82aa;
+  border: 2px solid #ff3838; }
 
-.pagesTable thead th:nth-child(7) {
-  background: #ffa100;
-  border: 2px solid #ff5e00; }
+.mapTable tbody tr:nth-child(1) {
+  background: #333333; }
 
-.pagesTable thead th:nth-child(8) {
-  background: #ffba00;
-  border: 2px solid orangered; }
+.mapTable tbody tr:nth-child(2) {
+  background: #3b3b3b; }
 
-.pagesTable thead th:nth-child(9) {
-  background: #ffd400;
-  border: 2px solid #ff2b00; }
+.mapTable tbody tr:nth-child(3) {
+  background: #444444; }
 
-.pagesTable thead th:nth-child(10) {
-  background: #ffed00;
-  border: 2px solid #ff1200; }
+.mapTable tbody tr:nth-child(4) {
+  background: #4c4c4c; }
+
+.mapTable tbody tr:nth-child(5) {
+  background: #555555; }
+
+.mapTable tbody tr:nth-child(6) {
+  background: #5d5d5d; }
+
+.mapTable tbody tr:nth-child(7) {
+  background: #666666; }
+
+.mapTable tbody tr:nth-child(8) {
+  background: #6e6e6e; }
+
+.mapTable tbody tr:nth-child(9) {
+  background: #777777; }
+
+.mapTable tbody tr:nth-child(10) {
+  background: #7f7f7f; }
 
 .pagesTable thead th:first-child {
   background: transparent;
@@ -58,6 +72,17 @@
     color: #2e2e2e;
     cursor: default; }
 
+.mapBox {
+  border-radius: 20px;
+  border: 5px #323232 solid;
+  background: rgba(0, 0, 0, 0.1); }
+
+.mapHoverInfo {
+  padding: 10px;
+  border-radius: 10px;
+  background: #323232;
+  border: 2px solid #555555; }
+
 .mG-back {
   background: #213542;
   /* Old browsers */
@@ -67,7 +92,8 @@
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #213542 0%, #213542 21%, #3366CC 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  background-image: -o-linear-gradient(#213542, #3366CC); }
+  background-image: -o-linear-gradient(#213542, #3366CC);
+  min-height: 100vh; }
 
 .mV-back {
   background: #213542;
@@ -78,7 +104,8 @@
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #213542 0%, #213542 21%, #40B307 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  background-image: -o-linear-gradient(#213542, #40B307); }
+  background-image: -o-linear-gradient(#213542, #40B307);
+  min-height: 100vh; }
 
 .mC-back {
   background: #213542;
@@ -89,7 +116,8 @@
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #213542 0%, #213542 21%, #FD7400 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  background-image: -o-linear-gradient(#213542, #FD7400); }
+  background-image: -o-linear-gradient(#213542, #FD7400);
+  min-height: 100vh; }
 
 .mB-back {
   background: #213542;
@@ -100,7 +128,8 @@
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #213542 0%, #213542 21%, #CE952B 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  background-image: -o-linear-gradient(#213542, #CE952B); }
+  background-image: -o-linear-gradient(#213542, #CE952B);
+  min-height: 100vh; }
 
 .mG {
   background: #3366CC; }
@@ -190,23 +219,19 @@
 
 .activeUsers-MyGene {
   font-size: 5em;
-  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
-  animation: neon2 1.5s ease-in-out infinite alternate; }
+  text-shadow: 0px 0px 10px #08d6f2, 0px 0px 20px white; }
 
 .activeUsers-MyVariant {
   font-size: 5em;
-  -webkit-animation: neonVariant 1.5s ease-in-out infinite alternate;
-  animation: neonVariant 1.5s ease-in-out infinite alternate; }
+  text-shadow: 0px 0px 10px #4fda16, 0px 0px 20px white; }
 
 .activeUsers-MyChem {
   font-size: 5em;
-  -webkit-animation: neonChem 1.5s ease-in-out infinite alternate;
-  animation: neonChem 1.5s ease-in-out infinite alternate; }
+  text-shadow: 0px 0px 10px #fc7e22, 0px 0px 20px white; }
 
 .activeUsers-BioThings {
   font-size: 5em;
-  -webkit-animation: neonBioThings 1.5s ease-in-out infinite alternate;
-  animation: neonBioThings 1.5s ease-in-out infinite alternate; }
+  text-shadow: 0px 0px 10px #feed0a, 0px 0px 20px white; }
 
 .twoEM {
   font-size: 2em; }
@@ -386,6 +411,13 @@ h1, h2, h3, h4, h5 {
   #footer p {
     color: #797979;
     font-size: .7em; }
+
+.deviceContainer {
+  margin: auto; }
+
+.device {
+  color: white;
+  display: inline-block; }
 
 .st0 {
   fill: #4D4D4D; }

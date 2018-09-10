@@ -30,7 +30,8 @@ class BioThingsPanel extends React.Component {
         mapData:[],
         pages: [],
         activeUsersHistory:[],
-        timer: null
+        timer: null,
+        viewIDs:[{name:'MyGene', id: '51012565'},{name:'MyVariant', id: '101990787'},{name:'MyChem', id: '181422902'},{name:'BioThings', id: '123483477'}]
     }
     this.fetchRealTimeData = this.fetchRealTimeData.bind(this);
     this.fetchAnalyticsData = this.fetchAnalyticsData.bind(this);
@@ -43,6 +44,9 @@ class BioThingsPanel extends React.Component {
     let pages =[]
 
     for (var i = 0; i < this.state.results.length; i++) {
+      if (this.state.results[i][5] === '/') {
+        this.state.results[i][5] = 'biothings.io/'
+      }
       pages.push(this.state.results[i][5])
     }
 
@@ -56,30 +60,70 @@ class BioThingsPanel extends React.Component {
 
   fetchRealTimeData(){
     let _authResp = googleGetAuthResponse();
-    axios.get(
-        this.state.realtimeApiURL
-      + this.state.viewID
-      + this.state.options
-      + "&access_token="
-      + _authResp.accessToken).then(res=>{
-      let users = parseInt(res.data.totalsForAllResults['rt:activeUsers']);
-      this.setState({
-        activeUsers: users
+
+    this.setState({
+      activeUsers: 0
+    });
+
+    for (var i = 0; i < this.state.viewIDs.length; i++) {
+      axios.get(
+          this.state.realtimeApiURL
+        + this.state.viewIDs[i]['id']
+        + this.state.options
+        + "&access_token="
+        + _authResp.accessToken).then(res=>{
+        let users = parseInt(res.data.totalsForAllResults['rt:activeUsers'])+(this.state.activeUsers);
+        this.setState({
+          activeUsers: users
+        });
+      }).catch(err=>{
+        throw(err);
       });
 
+    }
+
+    setTimeout(()=>{
+
       //creates data for Chart, max length is 10
-      this.state.activeUsersHistory.push(users)
+      this.state.activeUsersHistory.push(this.state.activeUsers)
       if (this.state.activeUsersHistory.length > 10) {
         this.state.activeUsersHistory.shift();
       }
 
-    }).catch(err=>{
-      throw(err);
-    })
+    },2000);
+
+
 
     this.fetchAnalyticsData();
 
   }
+
+  // fetchRealTimeData(){
+  //   let _authResp = googleGetAuthResponse();
+  //   axios.get(
+  //       this.state.realtimeApiURL
+  //     + this.state.viewID
+  //     + this.state.options
+  //     + "&access_token="
+  //     + _authResp.accessToken).then(res=>{
+  //     let users = parseInt(res.data.totalsForAllResults['rt:activeUsers']);
+  //     this.setState({
+  //       activeUsers: users
+  //     });
+  //
+  //     //creates data for Chart, max length is 10
+  //     this.state.activeUsersHistory.push(users)
+  //     if (this.state.activeUsersHistory.length > 10) {
+  //       this.state.activeUsersHistory.shift();
+  //     }
+  //
+  //   }).catch(err=>{
+  //     throw(err);
+  //   })
+  //
+  //   this.fetchAnalyticsData();
+  //
+  // }
 
   fetchAnalyticsData(){
     let _authResp = googleGetAuthResponse();
@@ -136,7 +180,6 @@ class BioThingsPanel extends React.Component {
       this.fetchRealTimeData();
       this.fetchAnalyticsData();
       this.timer =setInterval(function(){
-        console.log('myvariant timer');
         self.setState({
           lastActiveUsers: self.state.activeUsers
         })

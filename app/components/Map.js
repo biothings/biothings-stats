@@ -54,7 +54,7 @@ class ReactMap extends React.Component {
   }
   handleMarkerHover(markerIndex) {
     this.setState({
-      'hoverInfo': this.props.mapData[markerIndex].name + ": "+this.props.mapData[markerIndex].users+" users"
+      'hoverInfo': this.props.mapData[markerIndex].name + ": "+this.addComma(this.props.mapData[markerIndex].users)+" users"
     })
   }
   componentDidMount() {
@@ -77,13 +77,13 @@ class ReactMap extends React.Component {
     return (
       <div className="flex" style={{width:'70%', margin:'auto'}}>
         <div className="padding20" style={{flex:1}}>
-          <table style={{margin:'auto'}}>
+          <table style={{margin:'auto'}} className='mapTable'>
             <tbody>
               {this.props.mapData.map( (city,i)=>{
                 return (
                   <tr key={i}>
-                    <td style={{padding:'5px'}}>
-                      <span className={this.sizeMarker(city.users) > 7 ?'bold twoEM': 'bold'} style={{color: this.colorMarker(city.users) }}>{ this.addComma(city.users) }</span>
+                    <td style={{padding:'5px 10px', borderRadius:'10px'}}>
+                      <span className={this.sizeMarker(city.users) > 7 ?'bold twoEM': 'bold'} style={{color: this.colorMarker(city.users), textShadow:'2px 2px black' }}>{ this.addComma(city.users) }</span>
                       <br/>
                       <b style={{fontSize:'10px'}} className="whiteText">{city.name}</b>
                     </td>
@@ -94,8 +94,8 @@ class ReactMap extends React.Component {
           </table>
         </div>
         <div className="padding20" style={{flex:4}}>
-          <h3 className="whiteText bold">{this.state.hoverInfo}</h3>
-          <svg width={ 800 } height={ 450 } viewBox="0 0 800 450">
+          <h3 className="whiteText bold mapHoverInfo">{this.state.hoverInfo}</h3>
+          <svg className='mapBox' width={ 800 } height={ 450 } viewBox="0 0 800 450">
             <g className="countries">
               {
                 this.state.worlddata.map((d,i) => (

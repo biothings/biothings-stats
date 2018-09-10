@@ -29,12 +29,21 @@ background-image: -o-linear-gradient($to, $from);
 
 $percent-color:3%;
 
-@for $i from 1 through 10 {
+@for $i from 1 through 6 {
   .pagesTable thead th:nth-child(#{$i}) {
-    background: mix(yellow , red, $percent-color);
-    border: 2px solid mix(red , yellow, $percent-color);
+    background: mix( #05a7da , red, $percent-color);
+    border: 2px solid mix(red , white, $percent-color);
   }
-  $percent-color : $percent-color + 10%;
+  $percent-color : $percent-color + 15%;
+}
+
+$percent-color2:3%;
+
+@for $i from 1 through 10 {
+  .mapTable tbody tr:nth-child(#{$i}) {
+    background: mix( #858585 , #303030, $percent-color2);
+  }
+  $percent-color2 : $percent-color2 + 10%;
 }
 
 .pagesTable thead th:first-child{
@@ -61,17 +70,34 @@ $percent-color:3%;
   }
 }
 
+.mapBox{
+  border-radius: 20px;
+  border: 5px #323232 solid;
+  background: rgba(0,0,0,.1);
+}
+
+.mapHoverInfo{
+  padding: 10px;
+  border-radius: 10px;
+  background: #323232;
+  border: 2px solid #555555;
+}
+
 .mG-back{
   @include gradient($mainMyGene, #213542);
+  min-height: 100vh;
 }
 .mV-back{
   @include gradient($mainMyVariant, #213542);
+  min-height: 100vh;
 }
 .mC-back{
   @include gradient($mainMyChem, #213542);
+  min-height: 100vh;
 }
 .mB-back{
   @include gradient($mainBioThingsDarker, #213542);
+  min-height: 100vh;
 }
 
 .mG{
@@ -176,26 +202,30 @@ $percent-color:3%;
 
 .activeUsers-MyGene{
   font-size: 5em;
-  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
-  animation: neon2 1.5s ease-in-out infinite alternate;
+  // -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+  // animation: neon2 1.5s ease-in-out infinite alternate;
+  text-shadow: 0px 0px 10px #08d6f2, 0px 0px 20px white;
 }
 
 .activeUsers-MyVariant{
   font-size: 5em;
-  -webkit-animation: neonVariant 1.5s ease-in-out infinite alternate;
-  animation: neonVariant 1.5s ease-in-out infinite alternate;
+  // -webkit-animation: neonVariant 1.5s ease-in-out infinite alternate;
+  // animation: neonVariant 1.5s ease-in-out infinite alternate;
+  text-shadow: 0px 0px 10px #4fda16, 0px 0px 20px white;
 }
 
 .activeUsers-MyChem{
   font-size: 5em;
-  -webkit-animation: neonChem 1.5s ease-in-out infinite alternate;
-  animation: neonChem 1.5s ease-in-out infinite alternate;
+  // -webkit-animation: neonChem 1.5s ease-in-out infinite alternate;
+  // animation: neonChem 1.5s ease-in-out infinite alternate;
+  text-shadow: 0px 0px 10px #fc7e22, 0px 0px 20px white;
 }
 
 .activeUsers-BioThings{
   font-size: 5em;
-  -webkit-animation: neonBioThings 1.5s ease-in-out infinite alternate;
-  animation: neonBioThings 1.5s ease-in-out infinite alternate;
+  // -webkit-animation: neonBioThings 1.5s ease-in-out infinite alternate;
+  // animation: neonBioThings 1.5s ease-in-out infinite alternate;
+  text-shadow: 0px 0px 10px #feed0a, 0px 0px 20px white;
 }
 
 .twoEM{
@@ -398,6 +428,15 @@ h1,h2,h3,h4,h5{
     color: #797979;
     font-size: .7em;
   }
+}
+
+.deviceContainer{
+  margin: auto;
+}
+
+.device{
+  color: white;
+  display: inline-block;
 }
 
 .st0{fill:#4D4D4D;}
